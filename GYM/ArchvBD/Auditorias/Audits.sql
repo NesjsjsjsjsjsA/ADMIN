@@ -2,7 +2,6 @@
 USE MASTER
 
 -- Creación de la auditoria
-
 CREATE SERVER AUDIT Audit_Socio_GYM
 TO FILE (
     FILEPATH = '/var/opt/mssql/data/Auditoria',

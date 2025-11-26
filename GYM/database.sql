@@ -136,12 +136,35 @@ CREATE TABLE AuditoriaPagos (
     usuario NVARCHAR(50)
 );
 
+-- =========================
+-- 0. Tabla de auditoría de backups
+-- =========================
+IF OBJECT_ID('msdb.dbo.BackupAudit', 'U') IS NULL
+BEGIN
+    CREATE TABLE msdb.dbo.BackupAudit (
+        audit_id INT IDENTITY(1,1) PRIMARY KEY,
+        job_name SYSNAME NOT NULL,
+        backup_type NVARCHAR(20) NOT NULL,
+        backup_file NVARCHAR(260),
+        backup_date DATETIME DEFAULT GETDATE(),
+        backup_size_mb DECIMAL(12,2) NULL,
+        status NVARCHAR(20) NULL,
+        message NVARCHAR(4000) NULL
+    );
+END
 
--- Diccionario de Datos:
--- Politicas de seguirdad (esquemas, roles, oreivilegios, usuarios) 
--- 3 consultas con func ventana optiimiazarlas 
--- Plan de backup y restauracion
--- Calendario 
--- TAREa SQL con jobs
+-- =========================
+-- 0. Tabla Monitoreo
+-- =========================
 
---Power BI 
+IF OBJECT_ID('msdb.dbo.MonitorDbSize', 'U') IS NULL
+BEGIN
+    CREATE TABLE msdb.dbo.MonitorDbSize (
+        id INT IDENTITY(1,1) PRIMARY KEY,
+        db_name SYSNAME,
+        report_date DATETIME DEFAULT GETDATE(),
+        size_mb DECIMAL(12,2)
+    );
+END
+
+

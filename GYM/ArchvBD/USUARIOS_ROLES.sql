@@ -77,4 +77,8 @@ DENY SELECT ON SCHEMA::core TO RolEntrenador;
 GO
 
 
+SELECT name FROM sys.sql_principals WHERE type_desc = 'SQL_USER';
+
+
+
 
