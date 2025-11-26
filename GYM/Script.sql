@@ -10,6 +10,17 @@
 --Power BI 
 
 
+--Funcioes de cambios
+
+
+EXEC clases.sp_modificar_clase
+    @id_clase = 3,
+    @nombre_clase = 'Danza Moderna',
+    @descripcion = 'Clase enfocada en técnicas contemporáneas',
+    @cupo_maximo = 25,
+    @id_entrenador = 1;
+
+
 -- Examinando consultas
 
 SELECT * FROM GimnasioDB.clases.Clase

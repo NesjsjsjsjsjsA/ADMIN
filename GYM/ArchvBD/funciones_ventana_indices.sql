@@ -102,6 +102,38 @@ SELECT * FROM clases.Reserva
 --0 = mes con menos reservas
 
 
+--Otras funciones
+
+SELECT * FROM clases.Clase
+
+CREATE OR ALTER PROCEDURE clases.sp_modificar_clase
+    @id_clase      INT,
+    @nombre_clase  NVARCHAR(100),
+    @descripcion   NVARCHAR(255),
+    @cupo_maximo   INT,
+    @id_entrenador INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Validar que la clase exista
+    IF NOT EXISTS (SELECT 1 FROM clases.Clase WHERE id_clase = @id_clase)
+    BEGIN
+        RAISERROR ('El id_clase proporcionado no existe.', 16, 1);
+        RETURN;
+    END
+
+    -- Actualizar la clase
+    UPDATE clases.Clase
+    SET 
+        nombre_clase = @nombre_clase,
+        descripcion = @descripcion,
+        cupo_maximo = @cupo_maximo,
+        id_entrenador = @id_entrenador
+
+    WHERE id_clase = @id_clase;
+
+END
 
 
 
