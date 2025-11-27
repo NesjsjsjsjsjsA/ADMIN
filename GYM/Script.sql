@@ -9,29 +9,15 @@
 
 --Power BI 
 
-
---Funcioes de cambios
-
-
-EXEC clases.sp_modificar_clase
-    @id_clase = 3,
-    @nombre_clase = 'Danza Moderna',
-    @descripcion = 'Clase enfocada en técnicas contemporáneas',
-    @cupo_maximo = 25,
-    @id_entrenador = 1;
-
-
 -- Examinando consultas
-
-SELECT * FROM GimnasioDB.clases.Clase
-SELECT * FROM GimnasioDB.clases.Entrenador
-SELECT * FROM GimnasioDB.clases.HorarioClase
 SELECT * FROM GimnasioDB.core.Membresia
+SELECT * FROM GimnasioDB.clases.Entrenador
 SELECT * FROM GimnasioDB.core.Pago
 SELECT * FROM GimnasioDB.clases.Reserva
 SELECT * FROM GimnasioDB.core.Socio
 SELECT * FROM GimnasioDB.core.SocioMembresia
 GO
+
 
 --Diccionario de datos
 EXEC GimnasioDB.admin.sp_DataDictionary
@@ -44,19 +30,17 @@ EXEC GimnasioDB.core.sp_PagosMensuales
 EXEC GimnasioDB.core.sp_MesesLlenos
 
 --Trabajos con los JOBS
-SELECT * FROM msdb.dbo.BackupAudit
 
-    --Creacion de los JOBS
-    EXEC msdb.dbo.sp_CreateBackupFullJob
-    EXEC msdb.dbo.sp_CreateBackupDIFFJob
-    EXEC msdb.dbo.sp_CreateBackupLOGJob
-    EXEC msdb.dbo.sp_CreateCleanupJob
-    EXEC msdb.dbo.sp_SeeData
+EXEC clases.sp_registroPago 3, 1
+EXEC clases.sp_registroPago 15, 2
+EXEC clases.sp_registroPago 16, 3
+EXEC clases.sp_registroPago 32, 2
+EXEC clases.sp_registroPago 18, 1
 
-    --Borrado de los JOBS
-    EXEC msdb.dbo.sp_drop_job_if_exists @job_name = 'BackupFull_GimnasioDB';
-    EXEC msdb.dbo.sp_drop_job_if_exists @job_name = 'BackupDiff_GimnasioDB';
-    EXEC msdb.dbo.sp_drop_job_if_exists @job_name = 'BackupLog_GimnasioDB';
-    EXEC msdb.dbo.sp_drop_job_if_exists @job_name = 'Cleanup_Backups_GimnasioDB';
-    EXEC msdb.dbo.sp_drop_job_if_exists @job_name = 'Registro_Tamanio_DB';
+EXEC clases.sp_modificar_clase 33, 7, 12, 2
+SELECT * FROM GimnasioDB.clases.Clase
+
+INSERT INTO clases.clase (nombre_clase, descripcion, cupo_maximo, id_entrenador) 
+    VALUES ('Pechadas Intensas', 'Hora de ver tu potencial completo', 70, 80)
+
 

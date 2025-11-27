@@ -1,4 +1,3 @@
-
 -- Creación del Job CLEAN
 USE msdb;
 GO
@@ -53,16 +52,14 @@ BEGIN
 END
 GO
 
---Procesos para pruebas
-
 EXEC dbo.sp_CreateCleanupJob
 
 EXEC dbo.sp_start_job 'Cleanup_Backups_GimnasioDB';
 
-EXEC dbo.sp_drop_job_if_exists @job_name = 'Cleanup_Backups_GimnasioDB';
-
 -- Verificaciones 
 SELECT * FROM msdb.dbo.sysjobs WHERE name = 'Cleanup_Backups_GimnasioDB';
+
 SELECT * FROM msdb.dbo.sysschedules WHERE name = 'Schedule_Cleanup_Diario_04';
+
 SELECT * FROM msdb.dbo.sysjobschedules WHERE job_id IN 
-(SELECT job_id FROM msdb.dbo.sysjobs WHERE name = 'Cleanup_Backups_GimnasioDB');
+    (SELECT job_id FROM msdb.dbo.sysjobs WHERE name = 'Cleanup_Backups_GimnasioDB');

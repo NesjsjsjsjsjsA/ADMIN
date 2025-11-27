@@ -1,3 +1,5 @@
+USE msdb
+GO
 
 CREATE OR ALTER PROCEDURE dbo.sp_CreateBackupDIFFJob
 AS
@@ -64,9 +66,3 @@ EXEC dbo.sp_CreateBackupDIFFJob
 EXEC dbo.sp_start_job 'BackupDiff_GimnasioDB';
 
 EXEC dbo.sp_drop_job_if_exists @job_name = 'BackupDiff_GimnasioDB';
-
-EXEC dbo.sp_delete_schedule @schedule_name = 'Schedule_BackupDiff_Miercoles_00'
-
-EXEC msdb.dbo.sp_purge_jobhistory @job_name = 'BackupDiff_GimnasioDB';
-
-EXEC dbo.sp_delete_schedule @schedule_id = 1

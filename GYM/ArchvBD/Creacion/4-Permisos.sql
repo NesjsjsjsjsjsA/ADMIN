@@ -1,0 +1,28 @@
+USE GimnasioDB
+GO
+
+--Permisos según los esquemas
+
+--- Administrador acceso total ---
+GRANT CONTROL ON SCHEMA::dbo TO RolAdministrador;
+GRANT CONTROL ON SCHEMA::core TO RolAdministrador
+GRANT CONTROL ON SCHEMA::clases TO RolAdministrador
+GRANT CONTROL ON SCHEMA::admin TO RolAdministrador
+GO
+
+GRANT CREATE FUNCTION TO RolAdministrador;
+GRANT CREATE VIEW TO RolAdministrador;
+GRANT CREATE TABLE TO RolAdministrador;
+GRANT CREATE PROCEDURE TO RolAdministrador;
+
+
+-- Entrenador acceso limitado
+GRANT SELECT ON SCHEMA::clases TO RolEntrenador;
+DENY SELECT ON SCHEMA::core TO RolEntrenador;
+GO
+
+    -- Recepción acceso limitado
+GRANT SELECT, INSERT, UPDATE ON SCHEMA::core TO RolRecepcion;
+DENY DELETE ON SCHEMA::core TO RolRecepcion;
+GRANT SELECT ON SCHEMA::clases TO RolRecepcion;
+GO

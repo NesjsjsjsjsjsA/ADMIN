@@ -1,5 +1,7 @@
--- Creación del Job SeeData
+USE msdb
+GO
 
+-- Creación del Job SeeData
 CREATE OR ALTER PROCEDURE dbo.sp_SeeData
 AS
 BEGIN
@@ -61,8 +63,4 @@ END
 EXEC dbo.sp_SeeData
 
 EXEC dbo.sp_start_job 'Registro_Tamanio_DB';
-
-EXEC dbo.sp_drop_job_if_exists @job_name = 'Registro_Tamanio_DB';
-
-EXEC dbo.sp_delete_schedule @schedule_id = 1
 

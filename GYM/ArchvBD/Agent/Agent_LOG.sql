@@ -1,3 +1,5 @@
+USE msdb
+GO
 
 CREATE OR ALTER PROCEDURE dbo.sp_CreateBackupLOGJob
 AS
@@ -61,10 +63,5 @@ END
 EXEC dbo.sp_CreateBackupLOGJob
 
 EXEC dbo.sp_start_job 'BackupLog_GimnasioDB';
-EXEC dbo.sp_drop_job_if_exists @job_name = 'BackupLog_GimnasioDB';
-EXEC dbo.sp_purge_jobhistory @job_name = 'BackupLog_GimnasioDB';
-EXEC dbo.sp_delete_schedule @schedule_name = 'Schedule_BackupLog_15min'
-
-EXEC dbo.sp_delete_schedule @schedule_id = 1
 
 

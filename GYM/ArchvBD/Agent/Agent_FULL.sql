@@ -1,5 +1,5 @@
 USE msdb
-
+GO
 
 CREATE OR ALTER PROCEDURE dbo.sp_CreateBackupFullJob
 AS
@@ -66,11 +66,6 @@ END
 EXEC dbo.sp_CreateBackupFullJob
 
 EXEC dbo.sp_start_job 'BackupFull_GimnasioDB';
-EXEC dbo.sp_drop_job_if_exists @job_name = 'BackupFull_GimnasioDB';
-EXEC dbo.sp_delete_schedule @schedule_name = 'Schedule_BackupFull_Domingo_00'
-EXEC dbo.sp_purge_jobhistory @job_name = 'BackupFull_GimnasioDB';
-
-EXEC dbo.sp_delete_schedule @schedule_id = 1
 
 
 

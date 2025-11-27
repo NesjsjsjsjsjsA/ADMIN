@@ -1,5 +1,5 @@
-
 USE MASTER
+GO
 
 -- Creación de la auditoria
 CREATE SERVER AUDIT Audit_Socio_GYM
