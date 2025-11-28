@@ -1,0 +1,24 @@
+Para la creación del proyecto los integrantes son los siguientes:
+
+Adriana Gabriela Campos Martínez #00302323 
+
+José Alfredo Hernández Soriano #00031323 
+
+Francisco José Cardona Mejía #00119123 
+
+Carlos Enrique Guevara Tobar #00039123 
+
+Néstor Alejandro Ayala Abarca #00133723 
+
+Hola! Para futuras replicaciones hay unos detalles a tomar en cuenta:
+
+    --Esta base de datos se diseño por medio de Visual studio code por medio de la extensión mssql con una imagen proporcionada por Docker
+        En el puerto 1434
+    --La versión trabajada fue SQL SERVER 2022
+    --Para ver el dashboard es necesario usar la versión DESKTOP 
+
+
+Gracias por leer :D
+
+
+PD: Todos los integrantes aman SQL SERVER :3

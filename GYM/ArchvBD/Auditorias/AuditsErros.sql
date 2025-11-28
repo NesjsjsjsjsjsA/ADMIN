@@ -1,0 +1,15 @@
+USE MASTER
+GO
+
+ALTER SERVER AUDIT Audit_Socio WITH (STATE = OFF);
+DROP SERVER AUDIT Audit_Socio;
+GO
+
+SELECT * 
+FROM sys.dm_os_ring_buffers 
+WHERE ring_buffer_type='RING_BUFFER_XE_LOG';
+GO
+
+ALTER DATABASE AUDIT SPECIFICATION Audit_Socio_GYM
+WITH (STATE = OFF);
+GO

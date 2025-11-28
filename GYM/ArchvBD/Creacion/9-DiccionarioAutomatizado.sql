@@ -1,6 +1,7 @@
-
 USE GimnasioDB
 GO
+--ES NECESARIO USAR SUPER ADMIN-- 
+-- SA :D --
 
     IF OBJECT_ID('admin.sp_DataDictionary') IS NOT NULL
         DROP PROCEDURE admin.sp_DataDictionary

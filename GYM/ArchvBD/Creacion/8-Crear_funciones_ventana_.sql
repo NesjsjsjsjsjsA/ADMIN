@@ -1,9 +1,20 @@
 USE GimnasioDB
 GO
 
+-- Borrando los objetos
+
   IF OBJECT_ID('core.sp_PagosAcumuladosUltimoAnio') IS NOT NULL
     DROP PROCEDURE core.sp_PagosAcumuladosUltimoAnio
   GO
+
+    IF OBJECT_ID('core.sp_PagosMensuales') IS NOT NULL
+    DROP PROCEDURE core.sp_PagosMensuales
+  GO
+
+    IF OBJECT_ID('core.sp_MesesLlenos') IS NOT NULL
+    DROP PROCEDURE core.sp_MesesLlenos
+  GO
+
 
 -- 1- Que hace: muestra para cada pago el total acumulado de lo pagado por ese socio hasta ese momento
 CREATE OR ALTER PROCEDURE core.sp_PagosAcumuladosUltimoAnio
@@ -33,10 +44,6 @@ BEGIN
   ORDER BY id_socio, fecha_pago, id_pago;
 END
 GO
-
-  IF OBJECT_ID('core.sp_PagosMensuales') IS NOT NULL
-    DROP PROCEDURE core.sp_PagosMensuales
-  GO
 
 -- Consulta: total mensual por membresia y media movil 3-meses(la media del total recaudado en los ultimos 3 meses)
 CREATE OR ALTER PROCEDURE core.sp_PagosMensuales
@@ -70,10 +77,6 @@ END
 GO
 
 
-  IF OBJECT_ID('core.sp_MesesLlenos') IS NOT NULL
-    DROP PROCEDURE core.sp_MesesLlenos
-  GO
-
 
 --3- Consulta: meses más llenos usando PERCENT_RANK()
 CREATE OR ALTER PROCEDURE core.sp_MesesLlenos
@@ -97,11 +100,14 @@ BEGIN
 END
 GO
 
+--===========================================--
+-- Explicación para 'Meses Llenos ' --
+--===========================================--
 
---pct_rank_mes = que tan lleno esta ese mes comparado con los demas:
---1.00 = mes más lleno de todos
---0.50 = mes medio
---0.00 = mes con menos reservas
+  --pct_rank_mes = que tan lleno esta ese mes comparado con los demas:
+  --1.00 = mes más lleno de todos
+  --0.50 = mes medio
+  --0.00 = mes con menos reservas
 
 
 

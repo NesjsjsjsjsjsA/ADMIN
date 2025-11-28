@@ -1,6 +1,7 @@
---- CREACION DE LOGINS  ---
 USE master;
 GO
+
+--- Creación de Logins!
 
 IF NOT EXISTS (SELECT * FROM sys.server_principals WHERE name = 'admin_gym')
 BEGIN
@@ -26,7 +27,7 @@ BEGIN
 END
 GO
 
---- CREACION DE USUARIOS EN LA BASE DE DATOS ---
+---Creación de Usuarios!
 USE GimnasioDB;
 GO
 
@@ -48,7 +49,7 @@ BEGIN
 END
 GO
 
---- CREACION DE ROLES ---
+---Creación de Roles!
 IF NOT EXISTS(SELECT * FROM sys.database_principals WHERE name ='RolAdministrador')
 BEGIN
     CREATE ROLE RolAdministrador;
@@ -67,7 +68,7 @@ BEGIN
 END
 GO
 
---- ASIGNACION DE USUARIOS A ROLES ---
+--Asignación de Roles!
 EXEC sp_addrolemember 'RolAdministrador' , 'usuario_admin';
 EXEC sp_addrolemember 'RolRecepcion' , 'usuario_recepcion';
 EXEC sp_addrolemember 'RolEntrenador' , 'usuario_entrenador';

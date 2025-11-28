@@ -11,3 +11,8 @@ IF DB_ID('GimnasioDB') IS NULL
         PRINT 'Ya existe la base de datos'
     END
 GO
+
+-- Para el análisis 
+SET STATISTICS IO ON;
+SET STATISTICS TIME ON;
+GO

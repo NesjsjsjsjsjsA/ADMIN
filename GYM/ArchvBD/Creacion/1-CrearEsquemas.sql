@@ -1,6 +1,8 @@
 USE GimnasioDB;
 GO
 
+---Creando los esquemas
+
 IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = 'admin')
     EXEC('CREATE SCHEMA admin')
 GO

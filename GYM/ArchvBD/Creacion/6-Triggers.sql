@@ -2,8 +2,21 @@
 USE GimnasioDB
 GO
 
-DROP TRIGGER core.trg_Membresia0;
+-- Eliminar los trigger si ya existe
+
+IF OBJECT_ID('clases.trg_Entrenador_NoEliminarConClases', 'TR') IS NOT NULL
+    DROP TRIGGER clases.trg_Entrenador_NoEliminarConClases;
 GO
+
+IF OBJECT_ID('clases.trg_Reserva_ValidarMembresia', 'TR') IS NOT NULL
+    DROP TRIGGER clases.trg_Reserva_ValidarMembresia;
+GO
+
+IF OBJECT_ID('core.TR_AuditarPagos', 'TR') IS NOT NULL
+    DROP TRIGGER core.TR_AuditarPagos;
+GO
+
+-- Creación de los Triggers
 
 -- Evitar la eliminacion de entrenadores con clases asignadas
 CREATE OR ALTER TRIGGER clases.trg_Entrenador_NoEliminarConClases
