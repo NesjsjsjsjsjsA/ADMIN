@@ -2,7 +2,51 @@
 USE GimnasioDB
 GO
 
-DROP TRIGGER core.trg_Membresia0;
+-- Trigger para evitar socio con mas de una membresia Activa
+CREATE OR ALTER TRIGGER core.trg_SocioMembresia_UnicaActiva
+ON core.SocioMembresia
+AFTER INSERT
+AS
+BEGIN
+    IF EXISTS (
+        SELECT sm.id_socio
+        FROM core.SocioMembresia sm
+        INNER JOIN inserted i ON sm.id_socio = i.id_socio
+        WHERE sm.estado = 1
+        GROUP BY sm.id_socio
+        HAVING COUNT(*) > 1
+    )
+    BEGIN
+        RAISERROR ('El socio ya tiene una membresía activa.', 16, 1);
+        ROLLBACK TRANSACTION;
+        RETURN;
+    END
+END;
+GO
+
+
+--Crear una membresia luego de un pago
+CREATE OR ALTER TRIGGER core.trg_Pago_GeneraMembresia
+ON core.Pago
+AFTER INSERT
+AS
+BEGIN
+    INSERT INTO core.SocioMembresia 
+    (id_socio, id_membresia, fecha_inicio, fecha_fin, estado)
+    SELECT 
+        i.id_socio,
+        i.id_membresia,
+        GETDATE(),
+        DATEADD(MONTH, 1, GETDATE()),  -- duración 1 mes
+        1
+    FROM inserted i 
+    WHERE NOT EXISTS (
+        SELECT 1
+        FROM core.SocioMembresia sm
+        WHERE sm.id_socio = i.id_socio
+            AND sm.estado = 1
+    );
+END;
 GO
 
 -- Evitar la eliminacion de entrenadores con clases asignadas
@@ -50,7 +94,7 @@ BEGIN
 END;
 GO
 
--- Creación de trigger para auditorias
+-- Creación de trigger
 CREATE OR ALTER TRIGGER core.TR_AuditarPagos
 ON core.Pago
 AFTER INSERT, UPDATE, DELETE
@@ -69,5 +113,5 @@ BEGIN
     FROM inserted i
     FULL OUTER JOIN deleted d ON i.id_pago = d.id_pago;
 END;
-GO 
+GO  -- o el nombre del tuyo
 

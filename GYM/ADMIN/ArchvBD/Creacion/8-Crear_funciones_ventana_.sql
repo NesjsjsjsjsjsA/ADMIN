@@ -74,7 +74,6 @@ GO
     DROP PROCEDURE core.sp_MesesLlenos
   GO
 
-
 --3- Consulta: meses más llenos usando PERCENT_RANK()
 CREATE OR ALTER PROCEDURE core.sp_MesesLlenos
 AS 
@@ -99,9 +98,9 @@ GO
 
 
 --pct_rank_mes = que tan lleno esta ese mes comparado con los demas:
---1.00 = mes más lleno de todos
+--1.= mes más lleno de todos
 --0.50 = mes medio
---0.00 = mes con menos reservas
+--0 = mes con menos reservas
 
 
 

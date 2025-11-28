@@ -14,7 +14,6 @@ GO
 
 -- Exclusividades de admin
     ALTER SCHEMA admin TRANSFER dbo.AuditoriaPagos
-    ALTER SCHEMA admin TRANSFER dbo.sp_DataDictionary
 GO
 
 --Trasladando Exec
@@ -23,6 +22,7 @@ GO
     ALTER SCHEMA core TRANSFER dbo.sp_MesesLlenos
 GO
 
+ALTER SCHEMA admin TRANSFER dbo.sp_DataDictionary
 
 
 

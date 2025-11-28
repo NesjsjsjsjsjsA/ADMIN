@@ -1,8 +1,5 @@
 
-USE GimnasioDB
-GO
-
-    IF OBJECT_ID('admin.sp_DataDictionary') IS NOT NULL
+    IF OBJECT_ID('admin.admin.sp_DataDictionary') IS NOT NULL
         DROP PROCEDURE admin.sp_DataDictionary
     GO
 
@@ -153,7 +150,4 @@ ORDER BY dp.name, perm.permission_name;
 END;
 GO
 
---Diccionario de datos  (Únicamente con SÚPER ADMIN)
-EXEC GimnasioDB.admin.sp_DataDictionary
-GO
-
+EXEC admin.sp_DataDictionary

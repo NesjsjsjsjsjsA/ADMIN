@@ -1,0 +1,8 @@
+USE master
+GO
+
+IF DB_ID('GimnasioDB') IS NULL
+BEGIN 
+    CREATE DATABASE GimnasioDB;
+END
+GO

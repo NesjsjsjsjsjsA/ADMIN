@@ -72,12 +72,12 @@ BEGIN
 END
 GO
 
-    IF OBJECT_ID('core.sp_registroPago') IS NOT NULL
-        DROP PROCEDURE core.sp_registroPago
+    IF OBJECT_ID('clases.sp_registroPago') IS NOT NULL
+        DROP PROCEDURE clases.sp_registroPago
     GO
 
 --Añadir un pago
-CREATE OR ALTER PROCEDURE core.sp_registroPago 
+CREATE OR ALTER PROCEDURE clases.sp_registroPago 
     @id_socio INT,
     @formatoPago INT
 AS
@@ -113,46 +113,6 @@ INSERT INTO core.Pago (id_socio, id_membresia, monto, metodo_pago)
         @monto, 
         @metodoPago
         );
-END;
-GO
-
-
-    IF OBJECT_ID('core.sp_AgregarUnSocio') IS NOT NULL
-        DROP PROCEDURE core.sp_AgregarUnSocio
-    GO
-
--- Insertar Socio y Membresia
-CREATE OR ALTER PROCEDURE core.sp_AgregarUnSocio 
-    @nombre NVARCHAR(50),
-    @apellido NVARCHAR(50),
-    @fecha_nacimiento DATE,
-    @telefono NVARCHAR(20),
-    @email NVARCHAR(100),
-    @direccion NVARCHAR(150),
-    @membresia INT,
-    @Pago INT
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    DECLARE @id_socio INT;
-    DECLARE @fecha_inicio DATE;
-    DECLARE @fecha_fin DATE;
-
-    INSERT INTO core.Socio (nombre, apellido, fecha_nacimiento, telefono, email, direccion)
-    VALUES (@nombre, @apellido, @fecha_nacimiento, @telefono, @email, @direccion);
-
-    SET @id_socio = SCOPE_IDENTITY();
-
-    SET @fecha_inicio = GETDATE();
-    SET @fecha_fin = DATEADD(MONTH, 1, GETDATE());
-
-
-    INSERT INTO core.SocioMembresia (id_socio, id_membresia, fecha_inicio, fecha_fin)
-    VALUES (@id_socio, @membresia, @fecha_inicio, @fecha_fin);
-
-    EXEC core.sp_registroPago @id_socio, @Pago
-
 END;
 GO
 
