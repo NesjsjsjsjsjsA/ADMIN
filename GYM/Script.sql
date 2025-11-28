@@ -23,7 +23,6 @@ INSERT INTO clases.Reserva (id_socio, id_horario, fecha_reserva)
 
 -- Las 3 CTE (Solo admin_gym)
 
-
 EXEC GimnasioDB.core.sp_PagosAcumuladosUltimoAnio
 
 EXEC GimnasioDB.core.sp_PagosMensuales
