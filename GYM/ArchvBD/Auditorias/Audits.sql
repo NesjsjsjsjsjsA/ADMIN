@@ -15,8 +15,12 @@ WITH (
 
 -- por si ocurren problemas
 
-        ALTER SERVER AUDIT Audit_Socio
+USE master
+GO
+
+        ALTER SERVER AUDIT Audit_Socio_GYM
         WITH (STATE = ON);
+        GO
 
                 ALTER SERVER AUDIT Audit_Socio WITH (STATE = OFF);
 
@@ -26,8 +30,27 @@ WITH (
                 FROM sys.dm_os_ring_buffers 
                 WHERE ring_buffer_type='RING_BUFFER_XE_LOG';
 
+USE GimnasioDB
+GO
+
 CREATE DATABASE AUDIT SPECIFICATION Audit_Socio_GYM
 FOR SERVER AUDIT Audit_Socio_GYM
 ADD (INSERT ON GimnasioDB.core.Socio BY public)
 WITH (STATE = ON);
 GO
+
+ALTER DATABASE AUDIT SPECIFICATION Audit_Socio_GYM
+WITH (STATE = ON);
+GO
+
+
+SELECT name, is_state_enabled
+FROM sys.database_audit_specifications;
+
+
+SELECT *
+FROM sys.fn_get_audit_file('/var/opt/mssql/data/Auditoria/*', DEFAULT, DEFAULT);
+
+
+SELECT *
+FROM sys.fn_get_audit_file('/var/opt/mssql/data/Auditoria/*', DEFAULT, DEFAULT);

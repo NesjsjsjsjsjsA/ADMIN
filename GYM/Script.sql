@@ -34,7 +34,7 @@ GO
 --Ediciones hacia las tablas
    EXEC core.sp_registroPago 5001, 3 --Admin_gym y admin_recepcion
    
-   EXEC core.sp_AgregarUnSocio 'John', 'Milton', '1880-05-23', '51679030', 'is_john_marston@mail.com', 'Beacher hop', 3, 2 --Por Admin_gym y Admin_recepcion
+   EXEC core.sp_AgregarUnSocio 'L', 'R', '2000-11-11', '71901010', 'Android@mail.com', 'Av Los manglares', 3, 2 --Por Admin_gym y Admin_recepcion
    
    EXEC clases.sp_modificar_clase 53, 2, 70, 11 --Admin_gym y admin_recepcion
    

@@ -2,16 +2,16 @@ USE msdb
 GO
 
 --Revisando tamaño 
-SELECT * FROM dbo.MonitorDbSize; 
+SELECT * FROM msdb.dbo.MonitorDbSize; 
 GO
 
 -- Revisando los registros Audits
-SELECT * FROM dbo.BackupAudit
+SELECT * FROM msdb.dbo.BackupAudit
 GO
 
 -- Revisando los objetos
 SELECT name, enabled, description 
-FROM dbo.sysjobs 
+FROM msdb.dbo.sysjobs 
 WHERE name LIKE 'Backup%GimnasioDB' OR name LIKE '%Cleanup%' OR name = 'Registro_Tamanio_DB'; 
 GO
 --Formato para revisar los jobs 
